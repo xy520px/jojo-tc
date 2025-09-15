@@ -1,22 +1,23 @@
-/* 导航栏：加宽+文字间距 */
-nav {
-    width: 280px; 
-}
+/* 导航栏：移动端缩小间距和字体 */
 nav ul li a {
-    padding: 4px 0; 
+    padding: 3px 0;
+    font-size: 0.9rem;
 }
 
-/* 卡片 hover 效果 */
-.card {
+/* 内容区：移动端网格和卡片适配 */
+main .grid {
+    gap: 4px;
+}
+main .card {
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+main .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 10px -3px rgba(0, 0, 0, 0.1);
 }
 
-/* 模态框：Trello卡片风格 */
+/* 模态框：保持原有样式（点击图片的界面不变） */
 .modal {
     display: none;
     position: fixed;
@@ -32,7 +33,7 @@ nav ul li a {
 .modal-content {
     background-color: white;
     border-radius: 4px;
-    padding: 20px;
+    padding: 15px;
     max-width: 600px;
     width: 90%;
     max-height: 80vh;
@@ -46,9 +47,7 @@ nav ul li a {
     color: #555;
 }
 .stand-image {
-    max-width: 150px;
-    margin: 0 auto 16px;
-    display: block;
+    max-width: 120px;
 }
 .labels {
     margin-bottom: 16px;
