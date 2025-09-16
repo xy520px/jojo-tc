@@ -1,86 +1,187 @@
-/* 导航栏：移动端缩小间距和字体 */
-nav ul li a {
-    padding: 3px 0;
-    font-size: 0.9rem;
+/* 顶部标题：固定定位 + 缩小高度 */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: purple;
+  color: white;
+  padding: 0.5rem 1rem; /* 缩小垂直内边距，降低高度 */
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* 内容区：移动端网格和卡片适配 */
-main .grid {
-    gap: 4px;
-}
-main .card {
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-main .card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 10px -3px rgba(0, 0, 0, 0.1);
+header h1 {
+  font-size: 1.2rem; /* 缩小标题字体，进一步降低高度 */
+  margin: 0;
 }
 
-/* 模态框：保持原有样式（点击图片的界面不变） */
+/* 左侧导航：固定在左侧 + 垂直滚动（自身内容滚动） */
+nav {
+  width: 220px; /* 侧边栏宽度，可按需调整 */
+  position: fixed; /* 固定在左侧，不随页面滚动移动 */
+  top: 40px; /* 与标题底部对齐（标题高度约40px） */
+  left: 0;
+  bottom: 0; /* 延伸到页面底部，填满垂直空间 */
+  overflow-y: auto; /* 侧边栏内容过多时，自身垂直滚动 */
+  background: white;
+  padding: 1rem;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+}
+
+main {
+  margin-left: 220px; /* 与侧边栏宽度一致，确保不重叠 */
+  margin-top: 40px;   /* 避让顶部标题 */
+  padding: 1rem;
+  padding-left: 2rem; /* 【关键调整】增加左侧内边距，让主内容整体右移，避免文字被遮挡 */
+  overflow-x: auto;     /* 横向滚动触发 */
+}
+
+/* 分类容器：横向排列 + 统一间距 */
+.categories-container {
+  display: flex;
+  gap: 2rem; /* 分类之间的间距，可调整 */
+  min-width: max-content; /* 确保分类不换行，触发横向滚动 */
+  padding: 1rem 0;
+}
+
+/* 单个分类模块：固定宽度 + 内部垂直滚动 */
+.category {
+  width: 300px; /* 每个分类的宽度，可调整 */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* 分类内卡片的垂直间距 */
+  max-height: calc(100vh - 160px); /* 限制分类高度，避免超出视口 */
+  overflow-y: auto; /* 分类内部内容过多时，垂直滚动 */
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.category h2 {
+  margin-top: 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+/* 卡片样式：hover动效 + 图片尺寸 */
+.card {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card img {
+  max-width: 100%;
+  height: auto;
+  max-height: 150px; /* 图片最大高度，避免变形 */
+  object-fit: contain;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* 模态框通用样式 */
 .modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 2000; /* 确保在标题上方 */
+  justify-content: center;
+  align-items: center;
 }
+
 .modal-content {
-    background-color: white;
-    border-radius: 4px;
-    padding: 15px;
-    max-width: 600px;
-    width: 90%;
-    max-height: 80vh;
-    overflow-y: auto;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background-color: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
+
 .close {
-    float: right;
-    font-size: 24px;
-    cursor: pointer;
-    color: #555;
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+  color: #555;
 }
+
+.close:hover {
+  color: #000;
+}
+
 .stand-image {
-    max-width: 120px;
+  max-width: 150px;
+  display: block;
+  margin: 0 auto 1rem;
 }
+
 .labels {
-    margin-bottom: 16px;
+  margin-bottom: 1rem;
 }
+
 .label {
-    display: inline-block;
-    margin-right: 4px;
-    font-size: 12px;
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  /* 背景色改为浅紫色，更醒目 */
+  background-color: #e0e7ff; 
+  /* 文字色改为深紫色，增强对比 */
+  color: #000000; 
+  border-radius: 9999px;
+  margin-right: 0.5rem;
+  font-size: 0.875rem;
 }
+
 .description {
-    margin-bottom: 16px;
+  margin-bottom: 1rem;
 }
+
 #modal-quote {
-    font-style: italic;
-    margin-bottom: 8px;
+  font-style: italic;
+  color: #666;
 }
+
 #modal-stand-user {
-    font-size: 14px;
-    color: #666;
+  font-size: 0.875rem;
+  color: #888;
 }
-hr {
-    border: none;
-    border-top: 1px solid #eee;
-    margin: 16px 0;
-}
+
 .ability h3 {
-    font-size: 16px;
-    margin-bottom: 8px;
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
 }
+
 .ability p {
-    margin-bottom: 6px;
-    font-size: 14px;
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
 }
-.ability strong {
-    color: #333;
+
+/* 复制提示样式 */
+.hidden {
+  display: none;
+}
+
+.text-green-600 {
+  color: #10b981;
 }
