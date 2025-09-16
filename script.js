@@ -64,7 +64,7 @@ const data = {
 
     // JOJO第一部角色
     "dio-phantom-blood": {
-        title: "迪奥·布兰度[幻影之血.Ver]",
+        title: "Dio·Brando[幻影之血.Ver]",
         image: "https://youke1.picui.cn/s1/2025/09/15/68c7eeaacb40d.png",
         quote: "“你还记得你吃过多少片面包吗？”",
         standUser: "——迪奥·布兰度，「石鬼面」的使用者",
@@ -320,7 +320,8 @@ const data = {
          `
      }
  };
- // 打开模态框并填充数据
+
+ // 原有：角色/道具详情模态框功能
  function openModal(id) {
      const item = data[id];
      if (item) {
@@ -329,7 +330,6 @@ const data = {
          document.getElementById('modal-quote').innerHTML = item.quote;
          document.getElementById('modal-stand-user').innerHTML = item.standUser;
          document.getElementById('modal-skills').innerHTML = item.skills;
-         // 渲染标签
          const labelsContainer = document.querySelector('.labels');
          labelsContainer.innerHTML = '';
          item.labels.forEach(label => {
@@ -341,14 +341,48 @@ const data = {
          document.getElementById('myModal').style.display = 'flex';
      }
  }
- // 关闭模态框
  function closeModal() {
      document.getElementById('myModal').style.display = 'none';
  }
- // 点击模态框外部关闭
  window.onclick = function(event) {
      const modal = document.getElementById('myModal');
      if (event.target == modal) {
          closeModal();
      }
  };
+
+ // 新增：QQ群号模态框功能
+ function openQQModal() {
+     document.getElementById('qqModal').style.display = 'flex';
+     // 隐藏所有复制提示
+     document.getElementById('copyTip1').classList.add('hidden');
+     document.getElementById('copyTip2').classList.add('hidden');
+     document.getElementById('copyTip3').classList.add('hidden');
+ }
+ function closeQQModal() {
+     document.getElementById('qqModal').style.display = 'none';
+ }
+ // 复制QQ群号（区分不同群）
+ function copyQQ(qqId, tipId) {
+     const qqNumber = document.getElementById(qqId).textContent;
+     navigator.clipboard.writeText(qqNumber).then(() => {
+         // 隐藏其他提示，显示当前提示
+         document.getElementById('copyTip1').classList.add('hidden');
+         document.getElementById('copyTip2').classList.add('hidden');
+         document.getElementById('copyTip3').classList.add('hidden');
+         const currentTip = document.getElementById(tipId);
+         currentTip.classList.remove('hidden');
+         // 3秒后自动隐藏
+         setTimeout(() => {
+             currentTip.classList.add('hidden');
+         }, 3000);
+     });
+ }
+
+ // 新增：制作人员模态框功能
+ function openStaffModal() {
+     document.getElementById('staffModal').style.display = 'flex';
+ }
+ function closeStaffModal() {
+     document.getElementById('staffModal').style.display = 'none';
+ }
